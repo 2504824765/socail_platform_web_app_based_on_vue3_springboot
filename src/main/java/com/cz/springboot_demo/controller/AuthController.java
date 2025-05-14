@@ -21,7 +21,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseMessage login(@RequestBody LoginDTO loginDTO) throws AuthenticationException {
 
-            return ResponseMessage.success(userService.login(loginDTO));
+            return ResponseMessage.success("Login success", userService.login(loginDTO));
 
     }
 }

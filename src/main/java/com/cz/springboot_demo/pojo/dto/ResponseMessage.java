@@ -15,12 +15,12 @@ public class ResponseMessage<T> {
     }
 
     // 接口请求成功
-    public static <T> ResponseMessage success(T data) {
-        return new ResponseMessage(HttpStatus.OK.value(), "success", data);
+    public static <T> ResponseMessage success(String message, T data) {
+        return new ResponseMessage(HttpStatus.OK.value(), message, data);
     }
 
-    public static <T> ResponseMessage success() {
-        return new ResponseMessage(HttpStatus.OK.value(), "success", null);
+    public static <T> ResponseMessage success(String message) {
+        return new ResponseMessage(HttpStatus.OK.value(), message, null);
     }
 
     public Integer getCode() {

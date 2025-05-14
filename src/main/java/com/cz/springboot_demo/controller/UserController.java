@@ -21,27 +21,27 @@ public class UserController {
     @PostMapping // 可以指定访问接口
     public ResponseMessage addUser(@Validated @RequestBody UserDTO user) {
         User newUser = userService.add(user);
-        return ResponseMessage.success(newUser);
+        return ResponseMessage.success("Add success", newUser);
     }
 
     // Delete:Delete
     @DeleteMapping("/{userId}")
     public ResponseMessage deleteUser(@PathVariable Integer userId) {
         userService.delete(userId);
-        return ResponseMessage.success();
+        return ResponseMessage.success("Delete success");
     }
 
     // Edit:Put
     @PutMapping
     public ResponseMessage updateUser(@Validated @RequestBody UserEditDTO userEditDTO) {
         User newUser = userService.edit(userEditDTO);
-        return ResponseMessage.success(newUser);
+        return ResponseMessage.success("Edit success", newUser);
     }
 
     // Search:Get
     @GetMapping("/{userId}")
     public ResponseMessage getUser(@PathVariable Integer userId) {
         User user = userService.getUser(userId);
-        return ResponseMessage.success(user);
+        return ResponseMessage.success("Search success", user);
     }
 }
