@@ -2,6 +2,7 @@ package com.cz.springboot_demo.controller;
 
 import com.cz.springboot_demo.exception.InvalidFileFormatException;
 import com.cz.springboot_demo.pojo.dto.ResponseMessage;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/api/upload")
 public class FileUploadController {
+    @Operation(summary = "用户上传头像")
     @PostMapping
     public ResponseMessage uploadUserImage(String userName, MultipartFile photo, HttpServletRequest request) throws IOException {
         // 部署时的路径

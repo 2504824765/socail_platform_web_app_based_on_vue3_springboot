@@ -17,6 +17,12 @@ public class User {
     private String password;
     @Column(name = "user_email")
     private String email;
+    @Column(name = "gender")
+    private String gender;
+    @Column(name = "birthday")
+    private String birthday;
+    @Column(name = "phone")
+    private String phone;
 
     @Override
     public String toString() {
@@ -26,6 +32,30 @@ public class User {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 '}';
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Integer getUserId() {

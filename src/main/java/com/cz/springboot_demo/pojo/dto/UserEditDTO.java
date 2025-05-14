@@ -13,6 +13,12 @@ public class UserEditDTO {
     private String password;
     @NotBlank(message = "邮箱不能为空")
     private String email;
+    @NotBlank
+    private String gender;
+    @NotBlank
+    private String birthday;
+    @NotBlank
+    private String phone;
 
     @Override
     public String toString() {
@@ -21,7 +27,34 @@ public class UserEditDTO {
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
+                ", gender='" + gender + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", phone='" + phone + '\'' +
                 '}';
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Integer getUserId() {

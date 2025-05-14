@@ -1,6 +1,7 @@
 package com.cz.springboot_demo.exceptionHandler;
 
 import com.cz.springboot_demo.exception.InvalidFileFormatException;
+import com.cz.springboot_demo.exception.UserAlreadyExistException;
 import com.cz.springboot_demo.exception.UserNotFoundException;
 import com.cz.springboot_demo.pojo.dto.ResponseMessage;
 import org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException;
@@ -46,6 +47,12 @@ public class GlobalExceptionHandler {
     public ResponseMessage invalidFileFormatException(InvalidFileFormatException e) {
         logger.error(e.getMessage(), e);
         return new ResponseMessage(505, "Invalid File Format", null);
+    }
+
+    @ExceptionHandler(UserAlreadyExistException.class)
+    public ResponseMessage userAlreadyExistException(UserAlreadyExistException e) {
+        logger.error(e.getMessage(), e);
+        return new ResponseMessage(506, "User Already Exist", null);
     }
 
     @ExceptionHandler(Exception.class)

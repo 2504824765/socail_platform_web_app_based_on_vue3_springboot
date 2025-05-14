@@ -1,5 +1,6 @@
 package com.cz.springboot_demo.service;
 
+import com.cz.springboot_demo.exception.UserAlreadyExistException;
 import com.cz.springboot_demo.exception.UserNotFoundException;
 import com.cz.springboot_demo.pojo.User;
 import com.cz.springboot_demo.pojo.dto.LoginDTO;
@@ -24,6 +25,9 @@ public class UserService implements IUserService {
     @Override
     public User add(UserDTO userDto) {
         // 调用数据访问类方法
+        if (userRepository.findByUserName(userDto.getUserName()).isPresent()) {
+            throw new UserAlreadyExistException("User already exist");
+        }
         User user = new User();
         BeanUtils.copyProperties(userDto,user);
         return userRepository.save(user);
@@ -73,6 +77,6 @@ public class UserService implements IUserService {
     }
 
     private UserDTO convertUser2UserDTO(User user) {
-        return new UserDTO(user.getUserName(), user.getPassword(), user.getEmail());
+        return new UserDTO(user.getUserName(), user.getPassword(), user.getEmail(), user.getGender(), user.getBirthday(), user.getPhone());
     }
 }
