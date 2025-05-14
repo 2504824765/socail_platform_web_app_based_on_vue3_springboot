@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.naming.AuthenticationException;
+
 // Since 2025/5/12 by CZ
 @RestControllerAdvice // 专门用于做统一处理
 public class GlobalExceptionHandler {
@@ -17,6 +19,12 @@ public class GlobalExceptionHandler {
     public ResponseMessage userNotFoundException(UserNotFoundException e) {
         logger.error(e.getMessage(), e);
         return new ResponseMessage(501, "User not fond", null);
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseMessage authenticationException(AuthenticationException e) {
+        logger.error(e.getMessage(), e);
+        return new ResponseMessage(502, "Authentication failed", null);
     }
 
     @ExceptionHandler(Exception.class)

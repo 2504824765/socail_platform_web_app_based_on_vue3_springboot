@@ -13,6 +13,12 @@ public class UserDTO {
     @NotBlank(message = "邮箱不能为空")
     private String email;
 
+    public UserDTO(String userName, String password, String email) {
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+    }
+
     public String getUserName() {
         return userName;
     }

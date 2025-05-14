@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 // Since 2025/5/11 by CZ
 @RestController // 接口方法返回对象 直接转换成JSON文本
-@RequestMapping("/user") // 访问方法：localhost:8080/user
+@RequestMapping("/api/user") // 访问方法：localhost:8080/user
 public class UserController {
     @Autowired
     IUserService userService;
