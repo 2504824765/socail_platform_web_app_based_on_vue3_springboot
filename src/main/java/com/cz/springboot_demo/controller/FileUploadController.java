@@ -4,10 +4,7 @@ import com.cz.springboot_demo.exception.InvalidFileFormatException;
 import com.cz.springboot_demo.pojo.dto.ResponseMessage;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -15,6 +12,7 @@ import java.io.IOException;
 
 // Since 2025/5/14 by CZ
 @RestController
+@CrossOrigin
 @RequestMapping("/api/upload")
 public class FileUploadController {
     @Operation(summary = "用户上传头像")

@@ -19,14 +19,25 @@ public class UserDTO {
     private String birthday;
     @NotBlank
     private String phone;
+    @NotBlank
+    private String region;
 
-    public UserDTO(String userName, String password, String email, String gender, String birthday, String phone) {
+    public UserDTO(String userName, String password, String email, String gender, String birthday, String phone, String region) {
         this.userName = userName;
         this.password = password;
         this.email = email;
         this.gender = gender;
         this.birthday = birthday;
         this.phone = phone;
+        this.region = region;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
     }
 
     public String getGender() {

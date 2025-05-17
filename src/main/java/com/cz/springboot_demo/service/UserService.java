@@ -26,7 +26,7 @@ public class UserService implements IUserService {
     public User add(UserDTO userDto) {
         // 调用数据访问类方法
         if (userRepository.findByUserName(userDto.getUserName()).isPresent()) {
-            throw new UserAlreadyExistException("User already exist");
+            throw new UserAlreadyExistException("UserName already exist");
         }
         User user = new User();
         BeanUtils.copyProperties(userDto,user);
@@ -77,6 +77,6 @@ public class UserService implements IUserService {
     }
 
     private UserDTO convertUser2UserDTO(User user) {
-        return new UserDTO(user.getUserName(), user.getPassword(), user.getEmail(), user.getGender(), user.getBirthday(), user.getPhone());
+        return new UserDTO(user.getUserName(), user.getPassword(), user.getEmail(), user.getGender(), user.getBirthday(), user.getPhone(), user.getRegion());
     }
 }

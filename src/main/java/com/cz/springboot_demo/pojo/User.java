@@ -23,15 +23,15 @@ public class User {
     private String birthday;
     @Column(name = "phone")
     private String phone;
+    @Column(name = "region")
+    private String region;
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "userID=" + userId +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
     }
 
     public String getGender() {

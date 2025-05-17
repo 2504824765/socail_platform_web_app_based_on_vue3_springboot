@@ -19,18 +19,15 @@ public class UserEditDTO {
     private String birthday;
     @NotBlank
     private String phone;
+    @NotBlank
+    private String region;
 
-    @Override
-    public String toString() {
-        return "UserEditDTO{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", gender='" + gender + '\'' +
-                ", birthday='" + birthday + '\'' +
-                ", phone='" + phone + '\'' +
-                '}';
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
     }
 
     public String getGender() {
