@@ -40,19 +40,34 @@ public class UserService implements IUserService {
 
     @Override
     public User edit(UserEditDTO userEditDTO) {
-        User user = new User();
-        BeanUtils.copyProperties(userEditDTO,user);
-        if (userRepository.existsById(userEditDTO.getUserId())) {
-            return userRepository.save(user);
+        Optional<User> optionalUser = userRepository.findByUserName(userEditDTO.getUserName());
+
+        if (optionalUser.isPresent()) {
+            User existingUser = optionalUser.get();
+
+            // 更新属性
+            BeanUtils.copyProperties(userEditDTO, existingUser, "id"); // 避免 ID 被覆盖
+
+            return userRepository.save(existingUser); // 此时有 ID，是更新操作
+        } else {
+            throw new UserNotFoundException("User not found");
+        }
+    }
+
+
+    @Override
+    public User getUser(Integer userId) {
+        if (userRepository.existsById(userId)) {
+            return userRepository.findById(userId).get();
         } else {
             throw new UserNotFoundException("User not found");
         }
     }
 
     @Override
-    public User getUser(Integer userId) {
-        if (userRepository.existsById(userId)) {
-            return userRepository.findById(userId).get();
+    public User getUserByUsername(String userName) {
+        if (userRepository.findByUserName(userName).isPresent()) {
+            return userRepository.findByUserName(userName).get();
         } else {
             throw new UserNotFoundException("User not found");
         }

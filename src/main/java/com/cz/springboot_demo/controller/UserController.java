@@ -44,10 +44,17 @@ public class UserController {
     }
 
     // Search:Get
-    @GetMapping("/{userId}")
-    @Operation(summary = "查询用户")
+    @GetMapping("/byId/{userId}")
+    @Operation(summary = "通过Id查询用户")
     public ResponseMessage getUser(@PathVariable Integer userId) {
         User user = userService.getUser(userId);
+        return ResponseMessage.success("Search success", user);
+    }
+
+    @GetMapping("/byUserName/{userName}")
+    @Operation(summary = "通过UserName查询用户")
+    public ResponseMessage getUserByUserName(@PathVariable String userName) {
+        User user = userService.getUserByUsername(userName);
         return ResponseMessage.success("Search success", user);
     }
 }

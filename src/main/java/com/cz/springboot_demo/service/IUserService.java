@@ -39,6 +39,13 @@ public interface IUserService  {
     User getUser(Integer userId);
 
     /**
+     * 根据userName获取用户
+     * @param userName 用户userName
+     * @return 返回用户（如果存在）
+     */
+    User getUserByUsername(String userName);
+
+    /**
      * 登陆接口
      * @param loginDTO 登陆信息，包含：username，password
      * @return 返回登陆信息，包含：用户token、用户信息

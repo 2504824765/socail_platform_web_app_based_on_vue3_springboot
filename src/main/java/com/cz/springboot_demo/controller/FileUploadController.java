@@ -27,10 +27,11 @@ public class FileUploadController {
         System.out.println(photo.getContentType());
         if (photo.getContentType().contains("image")) {
             saveFile(photo, userName, path);
+            String imageUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/uploads/" + userName + ".jpg";
+            return ResponseMessage.success("Upload Success", imageUrl);
         } else {
             throw new InvalidFileFormatException("Invalid file format");
         }
-        return ResponseMessage.success("Upload success");
     }
 
     private void saveFile(MultipartFile file, String userName, String path) throws IOException {
