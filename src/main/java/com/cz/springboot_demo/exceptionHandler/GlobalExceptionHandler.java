@@ -7,6 +7,8 @@ import com.cz.springboot_demo.pojo.dto.ResponseMessage;
 import org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -53,6 +55,18 @@ public class GlobalExceptionHandler {
     public ResponseMessage userAlreadyExistException(UserAlreadyExistException e) {
         logger.error(e.getMessage(), e);
         return new ResponseMessage(506, "User Already Exist", null);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseMessage httpMessageNotReadableException(HttpMessageNotReadableException e) {
+        logger.error(e.getMessage(), e);
+        return new ResponseMessage(507, "HttpMessageNotReadableException", null);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseMessage methodArgumentNotValidException(MethodArgumentNotValidException e) {
+        logger.error(e.getMessage(), e);
+        return new ResponseMessage(508, "MethodArgumentNotValidException", null);
     }
 
     @ExceptionHandler(Exception.class)
