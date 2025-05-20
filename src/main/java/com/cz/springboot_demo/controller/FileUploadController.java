@@ -27,6 +27,7 @@ public class FileUploadController {
         System.out.println(photo.getContentType());
         if (photo.getContentType().contains("image")) {
             saveFile(photo, userName, path);
+            long timestamp = System.currentTimeMillis(); // 毫秒级时间戳
             String imageUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/uploads/" + userName + ".jpg";
             return ResponseMessage.success("Upload Success", imageUrl);
         } else {
