@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.naming.AuthenticationException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -21,6 +23,18 @@ import java.util.UUID;
 public class UserService implements IUserService {
     @Autowired
     UserRepository userRepository;
+
+    @Override
+    public List<User> getAllUsers() {
+        List<User> userList = new ArrayList<>();
+        userRepository.findAll().forEach(userList::add);
+        return userList;
+    }
+
+    @Override
+    public long getUserCount() {
+        return userRepository.count();
+    }
 
     @Override
     public User add(UserDTO userDto) {

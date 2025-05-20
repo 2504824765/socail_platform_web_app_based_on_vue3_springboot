@@ -57,4 +57,16 @@ public class UserController {
         User user = userService.getUserByUsername(userName);
         return ResponseMessage.success("Search success", user);
     }
+
+    @GetMapping("/count")
+    @Operation(summary = "查询总的用户数量")
+    public ResponseMessage getUserCount() {
+        return ResponseMessage.success("Search success", userService.getUserCount());
+    }
+
+    @GetMapping("/all")
+    @Operation(summary = "获取所有的用户信息")
+    public ResponseMessage getAllUser() {
+        return ResponseMessage.success("Search success", userService.getAllUsers());
+    }
 }

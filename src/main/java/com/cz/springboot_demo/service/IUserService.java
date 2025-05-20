@@ -8,9 +8,23 @@ import com.cz.springboot_demo.pojo.dto.UserEditDTO;
 import org.springframework.stereotype.Service;
 
 import javax.naming.AuthenticationException;
+import java.util.List;
 
 @Service
 public interface IUserService  {
+
+    /**
+     * 获取所有的用户信息
+     * @return 返回一个List
+     */
+    List<User> getAllUsers();
+
+    /**
+     * 获取总的用户数量
+     * @return 返回用户数量
+     */
+    long getUserCount();
+
     /**
      * 添加用户
      * @param user 要添加的User pojo类
