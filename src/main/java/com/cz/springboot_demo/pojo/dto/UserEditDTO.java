@@ -8,7 +8,7 @@ public class UserEditDTO {
     @NotBlank(message = "用户名不能为空") // 去除空格之后不能为空
     private String userName;
     @NotBlank(message = "密码不能为空")
-    @Length(min = 3, max = 12) // 设定密码的最小最大长度
+//    @Length(min = 3, max = 12) // 设定密码的最小最大长度
     private String password;
     @NotBlank(message = "邮箱不能为空")
     private String email;

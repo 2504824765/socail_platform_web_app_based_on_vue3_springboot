@@ -67,6 +67,6 @@ public class UserController {
     @GetMapping("/all")
     @Operation(summary = "获取所有的用户信息")
     public ResponseMessage getAllUser() {
-        return ResponseMessage.success("Search success", userService.getAllUsers());
+        return ResponseMessage.success("Get all users success", userService.getAllUsers());
     }
 }

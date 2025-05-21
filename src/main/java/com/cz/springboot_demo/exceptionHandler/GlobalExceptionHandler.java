@@ -1,8 +1,6 @@
 package com.cz.springboot_demo.exceptionHandler;
 
-import com.cz.springboot_demo.exception.InvalidFileFormatException;
-import com.cz.springboot_demo.exception.UserAlreadyExistException;
-import com.cz.springboot_demo.exception.UserNotFoundException;
+import com.cz.springboot_demo.exception.*;
 import com.cz.springboot_demo.pojo.dto.ResponseMessage;
 import org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException;
 import org.slf4j.Logger;
@@ -67,6 +65,18 @@ public class GlobalExceptionHandler {
     public ResponseMessage methodArgumentNotValidException(MethodArgumentNotValidException e) {
         logger.error(e.getMessage(), e);
         return new ResponseMessage(508, "MethodArgumentNotValidException", null);
+    }
+
+    @ExceptionHandler(OrderAlreadyExistException.class)
+    public ResponseMessage orderAlreadyExistException(OrderAlreadyExistException e) {
+        logger.error(e.getMessage(), e);
+        return new ResponseMessage(509, "Order Already Exist", null);
+    }
+
+    @ExceptionHandler(OrderNotFoundException.class)
+    public ResponseMessage orderNotFoundException(OrderNotFoundException e) {
+        logger.error(e.getMessage(), e);
+        return new ResponseMessage(510, "Order Not Found", null);
     }
 
     @ExceptionHandler(Exception.class)

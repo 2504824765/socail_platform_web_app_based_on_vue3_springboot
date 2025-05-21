@@ -55,7 +55,6 @@ public class UserService implements IUserService {
     @Override
     public User edit(UserEditDTO userEditDTO) {
         Optional<User> optionalUser = userRepository.findByUserName(userEditDTO.getUserName());
-
         if (optionalUser.isPresent()) {
             User existingUser = optionalUser.get();
 

@@ -1,0 +1,57 @@
+package com.cz.springboot_demo.pojo.dto;
+
+import jakarta.validation.constraints.NotBlank;
+
+// Since 2025/5/21 by CZ
+public class OrderEditDTO {
+    @NotBlank
+    private String userName;
+    @NotBlank
+    private Double totalAmount;
+    @NotBlank
+    private String orderStatus;
+    @NotBlank
+    private String paymentMethod;
+    @NotBlank
+    private String createTime;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public Double getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(Double totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+}
