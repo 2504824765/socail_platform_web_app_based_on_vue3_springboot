@@ -22,6 +22,26 @@ public class Order {
     private String paymentMethod;
     @Column(name = "create_time")
     private String createTime;
+    @Column(name = "good_name")
+    private String goodName;
+    @Column(name = "good_quantity")
+    private Integer goodQuantity;
+
+    public String getGoodName() {
+        return goodName;
+    }
+
+    public void setGoodName(String goodName) {
+        this.goodName = goodName;
+    }
+
+    public Integer getGoodQuantity() {
+        return goodQuantity;
+    }
+
+    public void setGoodQuantity(Integer goodQuantity) {
+        this.goodQuantity = goodQuantity;
+    }
 
     public String getOrderId() {
         return orderId;

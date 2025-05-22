@@ -1,5 +1,6 @@
 package com.cz.springboot_demo.pojo.dto;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 
 // Since 2025/5/21 by CZ
@@ -14,6 +15,26 @@ public class OrderEditDTO {
     private String paymentMethod;
     @NotBlank
     private String createTime;
+    @NotBlank
+    private String goodName;
+    @NotBlank
+    private Integer goodQuantity;
+
+    public String getGoodName() {
+        return goodName;
+    }
+
+    public void setGoodName(String goodName) {
+        this.goodName = goodName;
+    }
+
+    public Integer getGoodQuantity() {
+        return goodQuantity;
+    }
+
+    public void setGoodQuantity(Integer goodQuantity) {
+        this.goodQuantity = goodQuantity;
+    }
 
     public String getUserName() {
         return userName;
