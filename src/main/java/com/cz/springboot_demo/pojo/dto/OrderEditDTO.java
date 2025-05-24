@@ -6,8 +6,6 @@ import jakarta.validation.constraints.NotBlank;
 // Since 2025/5/21 by CZ
 public class OrderEditDTO {
     @NotBlank
-    private String userName;
-    @NotBlank
     private Double totalAmount;
     @NotBlank
     private String orderStatus;
@@ -34,14 +32,6 @@ public class OrderEditDTO {
 
     public void setGoodQuantity(Integer goodQuantity) {
         this.goodQuantity = goodQuantity;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public Double getTotalAmount() {
