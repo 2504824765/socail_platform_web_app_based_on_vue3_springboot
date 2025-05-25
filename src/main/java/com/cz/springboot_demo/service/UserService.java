@@ -49,7 +49,9 @@ public class UserService implements IUserService {
 
     @Override
     public void delete(Integer userId) {
-        userRepository.deleteById(userId);
+        if (!userRepository.existsById(userId)) {
+            userRepository.deleteById(userId);
+        }
     }
 
     @Override

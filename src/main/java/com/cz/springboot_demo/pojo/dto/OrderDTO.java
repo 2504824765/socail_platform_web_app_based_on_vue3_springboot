@@ -1,6 +1,7 @@
 package com.cz.springboot_demo.pojo.dto;
 
 import jakarta.persistence.Column;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
 // Since 2025/5/21 by CZ
@@ -20,6 +21,7 @@ public class OrderDTO {
     @NotBlank
     private String goodName;
     @NotBlank
+    @Min(value = 0)
     private Integer goodQuantity;
 
     public String getGoodName() {

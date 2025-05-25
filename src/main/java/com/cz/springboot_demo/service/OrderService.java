@@ -33,7 +33,9 @@ public class OrderService implements IOrderService {
 
     @Override
     public void deleteOrder(Long oder_id) {
-        orderRepository.deleteById(oder_id);
+        if (orderRepository.findById(oder_id).isPresent()) {
+            orderRepository.deleteById(oder_id);
+        }
     }
 
     @Override

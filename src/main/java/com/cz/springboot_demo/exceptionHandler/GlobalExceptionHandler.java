@@ -79,6 +79,30 @@ public class GlobalExceptionHandler {
         return new ResponseMessage(510, "Order Not Found", null);
     }
 
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ResponseMessage productNotFoundException(ProductNotFoundException e) {
+        logger.error(e.getMessage(), e);
+        return new ResponseMessage(511, "Product Not Found", null);
+    }
+
+    @ExceptionHandler(ProductAlreadyExistException.class)
+    public ResponseMessage productAlreadyExistException(ProductAlreadyExistException e) {
+        logger.error(e.getMessage(), e);
+        return new ResponseMessage(512, "Product Already Exist", null);
+    }
+
+    @ExceptionHandler(CategoryNotFoundException.class)
+    public ResponseMessage categoryNotFountException(CategoryNotFoundException e) {
+        logger.error(e.getMessage(), e);
+        return new ResponseMessage(513, "Category Not Found", null);
+    }
+
+    @ExceptionHandler(CategoryAlreadyExistException.class)
+    public ResponseMessage categoryAlreadyExistException(CategoryAlreadyExistException e) {
+        logger.error(e.getMessage(), e);
+        return new ResponseMessage(514, "Category Already Exist", null);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseMessage handleException(Exception e) {
         logger.error(e.getMessage(), e); // 查看日志查看具体异常
