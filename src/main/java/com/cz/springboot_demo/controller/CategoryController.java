@@ -39,4 +39,24 @@ public class CategoryController {
     public ResponseMessage getCategoryByCategoryName(@PathVariable String categoryName) {
         return ResponseMessage.success("Get category by categoryName successfully", categoryService.getCategoryByCategoryName(categoryName));
     }
+
+    @GetMapping("/firstClass")
+    public ResponseMessage getFirstClassCategory() {
+        return ResponseMessage.success("Get first class category successfully", categoryService.getFirstClassCategory());
+    }
+
+    @GetMapping("/secondClass")
+    public ResponseMessage getSecondClassCategory() {
+        return ResponseMessage.success("Get second class category successfully", categoryService.getSecondClassCategory());
+    }
+
+    @GetMapping("/thirdClass")
+    public ResponseMessage getThirdClassCategory() {
+        return ResponseMessage.success("Get third class category successfully", categoryService.getThirdClassCategory());
+    }
+
+    @GetMapping("/all")
+    public ResponseMessage getAllCategory() {
+        return ResponseMessage.success("Get all category successfully", categoryService.getAllCategories());
+    }
 }

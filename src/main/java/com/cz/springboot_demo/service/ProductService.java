@@ -4,6 +4,7 @@ import com.cz.springboot_demo.exception.CategoryNotFoundException;
 import com.cz.springboot_demo.exception.ProductAlreadyExistException;
 import com.cz.springboot_demo.exception.ProductNotFoundException;
 import com.cz.springboot_demo.pojo.Category;
+import com.cz.springboot_demo.pojo.Order;
 import com.cz.springboot_demo.pojo.Product;
 import com.cz.springboot_demo.pojo.dto.ProductCreateDTO;
 import com.cz.springboot_demo.pojo.dto.ProductEditDTO;
@@ -13,6 +14,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 // Since 2025/5/25 by CZ
@@ -81,6 +84,18 @@ public class ProductService implements IProductService {
     @Override
     public Product getProductByProductName(String productName) {
         return productRepository.findByProductName(productName).orElseThrow(() -> new ProductNotFoundException("Product Not Found"));
+    }
+
+    @Override
+    public Long getProductCount() {
+        return productRepository.count();
+    }
+
+    @Override
+    public List<Product> getAllProducts() {
+        List<Product> productList = new ArrayList<>();
+        productRepository.findAll().forEach(productList::add);
+        return productList;
     }
 
 }

@@ -40,4 +40,14 @@ public class ProductController {
     public ResponseMessage getProductByName(@PathVariable String productName) {
         return ResponseMessage.success("Get product by productName successfully", productService.getProductByProductName(productName));
     }
+
+    @GetMapping("/count")
+    public ResponseMessage getProductCount() {
+        return ResponseMessage.success("Get product count successfully", productService.getProductCount());
+    }
+
+    @GetMapping("/all")
+    public ResponseMessage getAllProduct() {
+        return ResponseMessage.success("Get all products successfully", productService.getAllProducts());
+    }
 }
