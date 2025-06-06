@@ -16,12 +16,12 @@ import java.io.IOException;
 @RequestMapping("/api/upload")
 public class FileUploadController {
     @Operation(summary = "用户上传头像")
-    @PostMapping
+    @PostMapping("/userImage")
     public ResponseMessage uploadUserImage(String userName, MultipartFile photo, HttpServletRequest request) throws IOException {
         // 部署时的路径
 //        String path = request.getSession().getServletContext().getRealPath("/upload/");
         // 模拟路径
-        String path = "/Users/meyerchen/Documents/Temp/social_platform/";
+        String path = "/Users/meyerchen/Documents/Temp/social_platform/userImage/";
         System.out.println(path);
         System.out.println(photo.getOriginalFilename());
         System.out.println(photo.getContentType());

@@ -26,4 +26,6 @@ public interface ICategoryService {
     List<Category> getThirdClassCategory();
 
     List<Category> getAllCategories();
+
+    List<Category> getChildById(Long categoryId);
 }

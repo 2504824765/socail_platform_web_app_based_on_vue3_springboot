@@ -18,8 +18,11 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/uploads/**")
-                .addResourceLocations("file:/Users/meyerchen/Documents/Temp/social_platform/");
+        registry.addResourceHandler("/uploads/userImage/**")
+                .addResourceLocations("file:/Users/meyerchen/Documents/Temp/social_platform/userImage/");
+
+        registry.addResourceHandler("/uploads/productImage/**")
+                .addResourceLocations("file:/Users/meyerchen/Documents/Temp/social_platform/productImage/");
     }
 
     @Bean

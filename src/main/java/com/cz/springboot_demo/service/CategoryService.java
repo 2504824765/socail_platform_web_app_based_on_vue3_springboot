@@ -1,6 +1,7 @@
 package com.cz.springboot_demo.service;
 
 import com.cz.springboot_demo.exception.CategoryAlreadyExistException;
+import com.cz.springboot_demo.exception.CategoryLevelIsLowestException;
 import com.cz.springboot_demo.exception.CategoryNotFoundException;
 import com.cz.springboot_demo.exception.ProductNotFoundException;
 import com.cz.springboot_demo.pojo.Category;
@@ -83,5 +84,19 @@ public class CategoryService implements ICategoryService {
     @Override
     public List<Category> getAllCategories() {
         return categoryRepository.findAll();
+    }
+
+    @Override
+    public List<Category> getChildById(Long categoryId) {
+        if (!categoryRepository.findById(categoryId).isPresent()) {
+            throw new CategoryNotFoundException("Category not exist");
+        } else {
+            Category targetCategory = categoryRepository.findById(categoryId).get();
+            if (targetCategory.getCategoryLevel() == 2) {
+                throw new CategoryLevelIsLowestException("Target Category is lowest");
+            } else {
+                return categoryRepository.findByCategoryParentId(targetCategory.getCategoryId());
+            }
+        }
     }
 }

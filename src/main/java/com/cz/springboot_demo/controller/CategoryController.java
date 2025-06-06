@@ -59,4 +59,9 @@ public class CategoryController {
     public ResponseMessage getAllCategory() {
         return ResponseMessage.success("Get all category successfully", categoryService.getAllCategories());
     }
+
+    @GetMapping("/getChildById/{categoryId}")
+    public ResponseMessage getChildById(@PathVariable Long categoryId) {
+        return ResponseMessage.success("Get child of category \"" + categoryId.toString() + "\" successfully", categoryService.getChildById(categoryId));
+    }
 }
