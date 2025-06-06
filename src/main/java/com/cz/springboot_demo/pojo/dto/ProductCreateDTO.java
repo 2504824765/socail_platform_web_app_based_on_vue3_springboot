@@ -21,6 +21,16 @@ public class ProductCreateDTO {
     private Boolean productIsOnSale;
     @NotBlank
     private String productCoverImageUrl;
+    @NotBlank
+    private double productScore;
+
+    public double getProductScore() {
+        return productScore;
+    }
+
+    public void setProductScore(double productScore) {
+        this.productScore = productScore;
+    }
 
     public String getProductName() {
         return productName;

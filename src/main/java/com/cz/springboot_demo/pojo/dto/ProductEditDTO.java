@@ -25,6 +25,16 @@ public class ProductEditDTO {
     Long categoryId;
     @NotBlank
     String productCoverImageUrl;
+    @NotBlank
+    double productScore;
+
+    public double getProductScore() {
+        return productScore;
+    }
+
+    public void setProductScore(double productScore) {
+        this.productScore = productScore;
+    }
 
     public String getProductName() {
         return productName;

@@ -35,6 +35,23 @@ public class FileUploadController {
         }
     }
 
+    @Operation(summary = "上传商品图片")
+    @PostMapping("/productImage")
+    public ResponseMessage uploadProductImage(String productName, MultipartFile photo, HttpServletRequest request) throws IOException {
+        String path = "/Users/meyerchen/Documents/Temp/social_platform/productImage/";
+        System.out.println(path);
+        System.out.println(photo.getOriginalFilename());
+        System.out.println(photo.getContentType());
+        if (photo.getContentType().contains("image")) {
+            saveFile(photo, productName, path);
+            long timestamp = System.currentTimeMillis();
+            String imageUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/uploads/" + productName + ".jpg";
+            return ResponseMessage.success("Upload Success", imageUrl);
+        } else {
+            throw new InvalidFileFormatException("Invalid file format");
+        }
+    }
+
     private void saveFile(MultipartFile file, String userName, String path) throws IOException {
         // 存储的目录是否存在，不存在就创建
         File dir = new File(path);

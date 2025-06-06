@@ -25,6 +25,16 @@ public class Product {
     Category category;
     @Column(name = "product_cover_image_url")
     String productCoverImageUrl;
+    @Column(name = "product_score")
+    double productScore;
+
+    public double getProductScore() {
+        return productScore;
+    }
+
+    public void setProductScore(double productScore) {
+        this.productScore = productScore;
+    }
 
     public Long getProductId() {
         return productId;
