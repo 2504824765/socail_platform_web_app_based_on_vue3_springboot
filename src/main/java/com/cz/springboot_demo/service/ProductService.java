@@ -4,7 +4,6 @@ import com.cz.springboot_demo.exception.CategoryNotFoundException;
 import com.cz.springboot_demo.exception.ProductAlreadyExistException;
 import com.cz.springboot_demo.exception.ProductNotFoundException;
 import com.cz.springboot_demo.pojo.Category;
-import com.cz.springboot_demo.pojo.Order;
 import com.cz.springboot_demo.pojo.Product;
 import com.cz.springboot_demo.pojo.dto.ProductCreateDTO;
 import com.cz.springboot_demo.pojo.dto.ProductEditDTO;
@@ -26,7 +25,6 @@ public class ProductService implements IProductService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    @Override
     public Product addProduct(ProductCreateDTO productCreateDTO) {
         if (productRepository.findByProductName(productCreateDTO.getProductName()).isPresent()) {
             throw new ProductAlreadyExistException("Product already exist");
@@ -52,8 +50,8 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public Product updateProduct(ProductEditDTO productEditDTO) {
-        Optional<Product> optionalProduct = productRepository.findByProductName(productEditDTO.getProductName());
+    public Product updateProduct(Long productId, ProductEditDTO productEditDTO) {
+        Optional<Product> optionalProduct = productRepository.findById(productId);
         if (!optionalProduct.isPresent()) {
             throw new ProductNotFoundException("Product Not Found");
         }

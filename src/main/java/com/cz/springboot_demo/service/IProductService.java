@@ -13,7 +13,7 @@ public interface IProductService {
 
     void deleteProduct(Long id);
 
-    Product updateProduct(ProductEditDTO productEditDTO);
+    Product updateProduct(Long productId, ProductEditDTO productEditDTO);
 
     Product getProductByProductId(Long productId);
 

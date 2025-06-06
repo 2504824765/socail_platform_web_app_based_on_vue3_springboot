@@ -15,7 +15,7 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    @PostMapping
+    @PostMapping()
     public ResponseMessage addProduct(@RequestBody ProductCreateDTO productCreateDTO) {
         return ResponseMessage.success("Add product successfully", productService.addProduct(productCreateDTO));
     }
@@ -26,9 +26,9 @@ public class ProductController {
         return ResponseMessage.success("Delete product successfully");
     }
 
-    @PutMapping()
-    public ResponseMessage updateProduct(@RequestBody ProductEditDTO productEditDTO) {
-        return ResponseMessage.success("Update product successfully", productService.updateProduct(productEditDTO));
+    @PutMapping("/{productId}")
+    public ResponseMessage updateProduct(@PathVariable("productId") Long productId, @RequestBody ProductEditDTO productEditDTO) {
+        return ResponseMessage.success("Update product successfully", productService.updateProduct(productId, productEditDTO));
     }
 
     @GetMapping("/byProductId/{productId}")

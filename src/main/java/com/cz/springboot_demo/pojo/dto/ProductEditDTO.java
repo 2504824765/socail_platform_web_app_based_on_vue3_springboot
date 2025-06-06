@@ -24,8 +24,6 @@ public class ProductEditDTO {
     @NotBlank
     Long categoryId;
     @NotBlank
-    String productCoverImageUrl;
-    @NotBlank
     double productScore;
 
     public double getProductScore() {
@@ -74,14 +72,6 @@ public class ProductEditDTO {
 
     public void setProductIsOnSale(Boolean productIsOnSale) {
         this.productIsOnSale = productIsOnSale;
-    }
-
-    public String getProductCoverImageUrl() {
-        return productCoverImageUrl;
-    }
-
-    public void setProductCoverImageUrl(String productCoverImageUrl) {
-        this.productCoverImageUrl = productCoverImageUrl;
     }
 
     public Long getCategoryId() {
