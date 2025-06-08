@@ -92,7 +92,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(CategoryNotFoundException.class)
-    public ResponseMessage categoryNotFountException(CategoryNotFoundException e) {
+    public ResponseMessage categoryNotFoundException(CategoryNotFoundException e) {
         logger.error(e.getMessage(), e);
         return new ResponseMessage(513, "Category Not Found", null);
     }
@@ -101,6 +101,12 @@ public class GlobalExceptionHandler {
     public ResponseMessage categoryAlreadyExistException(CategoryAlreadyExistException e) {
         logger.error(e.getMessage(), e);
         return new ResponseMessage(514, "Category Already Exist", null);
+    }
+
+    @ExceptionHandler(DeliveryNotFoundExceprion.class)
+    public ResponseMessage deliveryNotFoundException(DeliveryNotFoundExceprion e) {
+        logger.error(e.getMessage(), e);
+        return new ResponseMessage(515, "Delivery Not Found", null);
     }
 
     @ExceptionHandler(Exception.class)

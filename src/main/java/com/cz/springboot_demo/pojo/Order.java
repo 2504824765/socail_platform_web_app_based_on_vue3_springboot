@@ -9,7 +9,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 默认自增生成方式
     @Column(name = "order_id")
-    private String orderId;
+    private Long orderId;
     @Column(name = "user_name")
     private String userName;
     @Column(name = "order_name")
@@ -27,6 +27,14 @@ public class Order {
     @Column(name = "good_quantity")
     private Integer goodQuantity;
 
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
+    }
+
     public String getGoodName() {
         return goodName;
     }
@@ -41,14 +49,6 @@ public class Order {
 
     public void setGoodQuantity(Integer goodQuantity) {
         this.goodQuantity = goodQuantity;
-    }
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String oderId) {
-        this.orderId = oderId;
     }
 
     public String getUserName() {
