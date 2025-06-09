@@ -12,6 +12,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 // Since 2025/6/9 by CZ
@@ -70,5 +71,15 @@ public class DeliveryService implements IDeliveryService {
 
         // ✅ 保存更新后的 product
         return deliveryRepository.save(delivery);
+    }
+
+    @Override
+    public List<Delivery> getAllDeliveries() {
+        return deliveryRepository.findAll();
+    }
+
+    @Override
+    public Long getDeliveryCount() {
+        return deliveryRepository.count();
     }
 }

@@ -37,4 +37,14 @@ public class DeliveryController {
         return ResponseMessage.success("Update delivery successfully", deliveryService.updateDelivery(deliveryId, deliveryUpdateDTO));
     }
 
+    @GetMapping("/all")
+    public ResponseMessage getAllDeliveries() {
+        return ResponseMessage.success("Get all deliveries successfully", deliveryService.getAllDeliveries());
+    }
+
+    @GetMapping("/count")
+    public ResponseMessage getDeliveryCount() {
+        return ResponseMessage.success("Get delivery count successfully", deliveryService.getDeliveryCount());
+    }
+
 }

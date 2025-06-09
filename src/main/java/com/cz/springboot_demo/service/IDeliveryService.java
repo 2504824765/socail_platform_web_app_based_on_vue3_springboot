@@ -5,6 +5,8 @@ import com.cz.springboot_demo.pojo.dto.DeliveryCreateDTO;
 import com.cz.springboot_demo.pojo.dto.DeliveryUpdateDTO;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface IDeliveryService {
     Delivery createDelivery(DeliveryCreateDTO deliveryCreateDTO);
@@ -14,4 +16,8 @@ public interface IDeliveryService {
     Delivery getDeliveryById(Long deliveryId);
 
     Delivery updateDelivery(Long deliveryId, DeliveryUpdateDTO deliveryUpdateDTO);
+
+    List<Delivery> getAllDeliveries();
+
+    Long getDeliveryCount();
 }
