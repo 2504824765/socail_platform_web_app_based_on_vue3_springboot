@@ -9,6 +9,7 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 import javax.naming.AuthenticationException;
 import java.io.IOException;
@@ -107,6 +108,12 @@ public class GlobalExceptionHandler {
     public ResponseMessage deliveryNotFoundException(DeliveryNotFoundExceprion e) {
         logger.error(e.getMessage(), e);
         return new ResponseMessage(515, "Delivery Not Found", null);
+    }
+
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public ResponseMessage maxUploadSizeExceededException(MaxUploadSizeExceededException e) {
+        logger.error(e.getMessage(), e);
+        return new ResponseMessage(401, "Max Upload Size Exceeded", null);
     }
 
     @ExceptionHandler(Exception.class)

@@ -3,7 +3,7 @@ package com.cz.springboot_demo.service;
 import com.cz.springboot_demo.pojo.User;
 import com.cz.springboot_demo.pojo.dto.LoginDTO;
 import com.cz.springboot_demo.pojo.dto.LoginResponseDTO;
-import com.cz.springboot_demo.pojo.dto.UserDTO;
+import com.cz.springboot_demo.pojo.dto.UserCreateDTO;
 import com.cz.springboot_demo.pojo.dto.UserEditDTO;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +30,7 @@ public interface IUserService  {
      * @param user 要添加的User pojo类
      * @return 返回添加的用户信息
      */
-    User add(UserDTO user);
+    User add(UserCreateDTO user);
 
     /**
      * 根据用户ID删除用户
@@ -65,4 +65,6 @@ public interface IUserService  {
      * @return 返回登陆信息，包含：用户token、用户信息
      */
     LoginResponseDTO login(LoginDTO loginDTO) throws AuthenticationException;
+
+    List<User> getAllCompany();
 }

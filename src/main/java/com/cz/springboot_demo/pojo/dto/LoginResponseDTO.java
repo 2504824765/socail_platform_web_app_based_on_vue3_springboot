@@ -3,9 +3,9 @@ package com.cz.springboot_demo.pojo.dto;
 // Since 2025/5/12 by CZ
 public class LoginResponseDTO {
     private String token;
-    private UserDTO userInfo;
+    private UserCreateDTO userInfo;
 
-    public LoginResponseDTO(String token, UserDTO userInfo) {
+    public LoginResponseDTO(String token, UserCreateDTO userInfo) {
         this.token = token;
         this.userInfo = userInfo;
     }
@@ -18,11 +18,11 @@ public class LoginResponseDTO {
         this.token = token;
     }
 
-    public UserDTO getUserInfo() {
+    public UserCreateDTO getUserInfo() {
         return userInfo;
     }
 
-    public void setUserInfo(UserDTO userInfo) {
+    public void setUserInfo(UserCreateDTO userInfo) {
         this.userInfo = userInfo;
     }
 }

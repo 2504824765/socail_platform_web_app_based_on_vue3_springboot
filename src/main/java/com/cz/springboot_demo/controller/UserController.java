@@ -2,7 +2,7 @@ package com.cz.springboot_demo.controller;
 
 import com.cz.springboot_demo.pojo.User;
 import com.cz.springboot_demo.pojo.dto.ResponseMessage;
-import com.cz.springboot_demo.pojo.dto.UserDTO;
+import com.cz.springboot_demo.pojo.dto.UserCreateDTO;
 import com.cz.springboot_demo.pojo.dto.UserEditDTO;
 import com.cz.springboot_demo.service.IUserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,7 +22,7 @@ public class UserController {
     // 流程：通过localhost:8080/user的post方法，调用业务逻辑层的add，调用repository的save
     @PostMapping // 可以指定访问接口
     @Operation(summary = "添加用户")
-    public ResponseMessage addUser(@Validated @RequestBody UserDTO user) {
+    public ResponseMessage addUser(@Validated @RequestBody UserCreateDTO user) {
         User newUser = userService.add(user);
         return ResponseMessage.success("Add success", newUser);
     }
@@ -68,5 +68,10 @@ public class UserController {
     @Operation(summary = "获取所有的用户信息")
     public ResponseMessage getAllUser() {
         return ResponseMessage.success("Get all users success", userService.getAllUsers());
+    }
+
+    @GetMapping("/allCompany")
+    public ResponseMessage getAllCompany() {
+        return ResponseMessage.success("Get all users success", userService.getAllCompany());
     }
 }

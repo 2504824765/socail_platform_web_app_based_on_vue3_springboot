@@ -5,7 +5,7 @@ import com.cz.springboot_demo.exception.UserNotFoundException;
 import com.cz.springboot_demo.pojo.User;
 import com.cz.springboot_demo.pojo.dto.LoginDTO;
 import com.cz.springboot_demo.pojo.dto.LoginResponseDTO;
-import com.cz.springboot_demo.pojo.dto.UserDTO;
+import com.cz.springboot_demo.pojo.dto.UserCreateDTO;
 import com.cz.springboot_demo.pojo.dto.UserEditDTO;
 import com.cz.springboot_demo.repository.UserRepository;
 import org.springframework.beans.BeanUtils;
@@ -37,13 +37,13 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User add(UserDTO userDto) {
+    public User add(UserCreateDTO userCreateDto) {
         // 调用数据访问类方法
-        if (userRepository.findByUserName(userDto.getUserName()).isPresent()) {
+        if (userRepository.findByUserName(userCreateDto.getUserName()).isPresent()) {
             throw new UserAlreadyExistException("UserName already exist");
         }
         User user = new User();
-        BeanUtils.copyProperties(userDto,user);
+        BeanUtils.copyProperties(userCreateDto,user);
         return userRepository.save(user);
     }
 
@@ -106,7 +106,12 @@ public class UserService implements IUserService {
         }
     }
 
-    private UserDTO convertUser2UserDTO(User user) {
-        return new UserDTO(user.getUserName(), user.getPassword(), user.getEmail(), user.getGender(), user.getBirthday(), user.getPhone(), user.getRegion());
+    @Override
+    public List<User> getAllCompany() {
+        return userRepository.findByRole("deliveryCo");
+    }
+
+    private UserCreateDTO convertUser2UserDTO(User user) {
+        return new UserCreateDTO(user.getUserName(), user.getPassword(), user.getEmail(), user.getGender(), user.getBirthday(), user.getPhone(), user.getRegion());
     }
 }

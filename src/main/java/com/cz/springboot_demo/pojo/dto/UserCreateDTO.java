@@ -1,11 +1,9 @@
 package com.cz.springboot_demo.pojo.dto;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
-import org.hibernate.validator.constraints.Length;
 
 // Since 2025/5/11 by CZ
-public class UserDTO {
+public class UserCreateDTO {
     @NotBlank(message = "用户名不能为空") // 去除空格之后不能为空
     private String userName;
     @NotBlank(message = "密码不能为空")
@@ -21,8 +19,10 @@ public class UserDTO {
     private String phone;
     @NotBlank
     private String region;
+//    @NotBlank
+    private String role;
 
-    public UserDTO(String userName, String password, String email, String gender, String birthday, String phone, String region) {
+    public UserCreateDTO(String userName, String password, String email, String gender, String birthday, String phone, String region) {
         this.userName = userName;
         this.password = password;
         this.email = email;
@@ -30,6 +30,14 @@ public class UserDTO {
         this.birthday = birthday;
         this.phone = phone;
         this.region = region;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getRegion() {
