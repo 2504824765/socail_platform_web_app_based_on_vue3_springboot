@@ -2,11 +2,14 @@ package com.cz.springboot_demo.service;
 
 import com.cz.springboot_demo.exception.OrderAlreadyExistException;
 import com.cz.springboot_demo.exception.OrderNotFoundException;
+import com.cz.springboot_demo.exception.ProductNotFoundException;
 import com.cz.springboot_demo.exception.UserNotFoundException;
 import com.cz.springboot_demo.pojo.Order;
 import com.cz.springboot_demo.pojo.dto.OrderDTO;
 import com.cz.springboot_demo.pojo.dto.OrderEditDTO;
 import com.cz.springboot_demo.repository.OrderRepository;
+import com.cz.springboot_demo.repository.ProductRepository;
+import com.cz.springboot_demo.repository.UserRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,20 +17,34 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 // Since 2025/5/21 by CZ
 @Service
 public class OrderService implements IOrderService {
     @Autowired
     OrderRepository orderRepository;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    ProductRepository productRepository;
 
     @Override
-    public Order addOrder(OrderDTO oderDTO) {
-        if (orderRepository.findByOrderName(oderDTO.getOrderName()).isPresent()) {
-            throw new OrderAlreadyExistException("Order already exist");
+    public Order addOrder(OrderDTO orderDTO) {
+//        if (orderRepository.findByOrderName(oderDTO.getOrderName()).isPresent()) {
+//            throw new OrderAlreadyExistException("Order already exist");
+//        }
+        if (!userRepository.findByUserName(orderDTO.getUserName()).isPresent()) {
+            throw new UserNotFoundException("User not found");
+        }
+        if (!productRepository.findByProductName(orderDTO.getGoodName()).isPresent()) {
+            throw new ProductNotFoundException("Product not found");
         }
         Order order = new Order();
-        BeanUtils.copyProperties(oderDTO, order);
+        BeanUtils.copyProperties(orderDTO, order);
+        Random random = new Random();
+        int number = 100000 + random.nextInt(900000);
+        order.setOrderName("ORD" + String.valueOf(number));
         return orderRepository.save(order);
     }
 

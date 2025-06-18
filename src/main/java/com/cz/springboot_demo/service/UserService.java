@@ -49,8 +49,11 @@ public class UserService implements IUserService {
 
     @Override
     public void delete(Integer userId) {
-        if (!userRepository.existsById(userId)) {
+        System.out.println("RECEIVED ID: " + userId);
+        if (userRepository.existsById(userId)) {
             userRepository.deleteById(userId);
+        } else {
+            throw new UserNotFoundException("User not found");
         }
     }
 
@@ -72,6 +75,7 @@ public class UserService implements IUserService {
 
     @Override
     public User getUser(Integer userId) {
+        System.out.println("RECEIVED ID: " + userId);
         if (userRepository.existsById(userId)) {
             return userRepository.findById(userId).get();
         } else {

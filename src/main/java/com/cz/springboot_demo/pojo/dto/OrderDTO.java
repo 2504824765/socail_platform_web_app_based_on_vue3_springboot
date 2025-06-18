@@ -9,8 +9,6 @@ public class OrderDTO {
     @NotBlank
     private String userName;
     @NotBlank
-    private String orderName;
-    @NotBlank
     private Double totalAmount;
     @NotBlank
     private String orderStatus;
@@ -46,14 +44,6 @@ public class OrderDTO {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getOrderName() {
-        return orderName;
-    }
-
-    public void setOrderName(String orderName) {
-        this.orderName = orderName;
     }
 
     public Double getTotalAmount() {

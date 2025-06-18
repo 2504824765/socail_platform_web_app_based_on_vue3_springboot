@@ -21,7 +21,7 @@ public class FileUploadController {
         // 部署时的路径
 //        String path = request.getSession().getServletContext().getRealPath("/upload/");
         // 模拟路径
-        String path = "/Users/meyerchen/Documents/Temp/social_platform/userImage/";
+        String path = "/Users/zanderc/Documents/Runtime/social_platform/userImage/";
         System.out.println(path);
         System.out.println(photo.getOriginalFilename());
         System.out.println(photo.getContentType());
@@ -38,7 +38,7 @@ public class FileUploadController {
     @Operation(summary = "上传商品图片")
     @PostMapping("/productImage")
     public ResponseMessage uploadProductImage(String productName, MultipartFile photo, HttpServletRequest request) throws IOException {
-        String path = "/Users/meyerchen/Documents/Temp/social_platform/productImage/";
+        String path = "/Users/zanderc/Documents/Runtime/social_platform/productImage/";
         System.out.println(path);
         System.out.println(photo.getOriginalFilename());
         System.out.println(photo.getContentType());
