@@ -13,7 +13,7 @@ public interface ICategoryService {
 
     void deleteCategory(Long categoryId);
 
-    Category updateCategory(CategoryEditDTO categoryEditDTO);
+    Category updateCategory(Long categoryId, CategoryEditDTO categoryEditDTO);
 
     Category getCategoryByCategoryId(Long categoryId);
 

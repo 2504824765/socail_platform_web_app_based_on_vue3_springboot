@@ -3,7 +3,6 @@ package com.cz.springboot_demo.service;
 import com.cz.springboot_demo.exception.CategoryAlreadyExistException;
 import com.cz.springboot_demo.exception.CategoryLevelIsLowestException;
 import com.cz.springboot_demo.exception.CategoryNotFoundException;
-import com.cz.springboot_demo.exception.ProductNotFoundException;
 import com.cz.springboot_demo.pojo.Category;
 import com.cz.springboot_demo.pojo.dto.CategoryCreateDTO;
 import com.cz.springboot_demo.pojo.dto.CategoryEditDTO;
@@ -41,10 +40,11 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
-    public Category updateCategory(CategoryEditDTO categoryEditDTO) {
-        Optional<Category> optionalCategory = categoryRepository.findByCategoryName(categoryEditDTO.getCategoryName());
+    public Category updateCategory(Long categoryId, CategoryEditDTO categoryEditDTO) {
+//        Optional<Category> optionalCategory = categoryRepository.findByCategoryName(categoryEditDTO.getCategoryName());
+        Optional<Category> optionalCategory = categoryRepository.findById(categoryId);
         if (!optionalCategory.isPresent()) {
-            throw new ProductNotFoundException("Product Not Found");
+            throw new CategoryNotFoundException("Category Not Found");
         }
 
         Category category = optionalCategory.get();

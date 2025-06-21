@@ -25,9 +25,10 @@ public class CategoryController {
         return ResponseMessage.success("Category deleted successfully");
     }
 
-    @PutMapping()
-    public ResponseMessage updateCategory(@RequestBody CategoryEditDTO categoryEditDTO) {
-        return ResponseMessage.success("Category updated successfully", categoryService.updateCategory(categoryEditDTO));
+    @PutMapping("/{categoryId}")
+    public ResponseMessage updateCategory(@PathVariable("categoryId") Long categoryId, @RequestBody CategoryEditDTO categoryEditDTO) {
+        System.err.println("updateCategory");
+        return ResponseMessage.success("Category updated successfully", categoryService.updateCategory(categoryId, categoryEditDTO));
     }
 
     @GetMapping("/byCategoryId/{categoryId}")
