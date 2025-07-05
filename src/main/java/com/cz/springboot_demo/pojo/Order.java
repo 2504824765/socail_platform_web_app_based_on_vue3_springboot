@@ -1,11 +1,12 @@
 package com.cz.springboot_demo.pojo;
 
 import jakarta.persistence.*;
+import java.io.Serializable;
 
 // Since 2025/5/21 by CZ
 @Table(name = "tb_order")
 @Entity
-public class Order {
+public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 默认自增生成方式
     @Column(name = "order_id")

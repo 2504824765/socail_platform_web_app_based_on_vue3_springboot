@@ -10,6 +10,8 @@ import com.cz.springboot_demo.repository.DeliveryRepository;
 import com.cz.springboot_demo.repository.OrderRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,6 +26,7 @@ public class DeliveryService implements IDeliveryService {
     private OrderRepository orderRepository;
 
     @Override
+    @CacheEvict(value = {"deliveries", "deliveryCount", "delivery"}, allEntries = true)
     public Delivery createDelivery(DeliveryCreateDTO deliveryCreateDTO) {
         if (deliveryRepository.findByOrder_OrderId(deliveryCreateDTO.getOrderId()).isPresent()) {
             throw new OrderAlreadyhaveADeliveryException("Order already has a delivery info");
@@ -40,6 +43,7 @@ public class DeliveryService implements IDeliveryService {
     }
 
     @Override
+    @CacheEvict(value = {"deliveries", "deliveryCount", "delivery"}, allEntries = true)
     public void deleteDelivery(Long deliveryId) {
         if (deliveryRepository.findById(deliveryId).isPresent()) {
             deliveryRepository.deleteById(deliveryId);
@@ -49,6 +53,7 @@ public class DeliveryService implements IDeliveryService {
     }
 
     @Override
+    @Cacheable(value = "delivery", key = "#deliveryId")
     public Delivery getDeliveryById(Long deliveryId) {
         if (deliveryRepository.findById(deliveryId).isPresent()) {
             return deliveryRepository.findById(deliveryId).get();
@@ -58,6 +63,7 @@ public class DeliveryService implements IDeliveryService {
     }
 
     @Override
+    @CacheEvict(value = {"deliveries", "deliveryCount", "delivery"}, allEntries = true)
     public Delivery updateDelivery(Long deliveryId, DeliveryUpdateDTO deliveryUpdateDTO) {
         Optional<Delivery> optionalDelivery = deliveryRepository.findById(deliveryId);
         if (!optionalDelivery.isPresent()) {
@@ -74,11 +80,13 @@ public class DeliveryService implements IDeliveryService {
     }
 
     @Override
+    @Cacheable(value = "deliveries", key = "'all'")
     public List<Delivery> getAllDeliveries() {
         return deliveryRepository.findAll();
     }
 
     @Override
+    @Cacheable(value = "deliveryCount", key = "'count'")
     public Long getDeliveryCount() {
         return deliveryRepository.count();
     }

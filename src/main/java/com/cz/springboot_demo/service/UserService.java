@@ -6,6 +6,8 @@ import com.cz.springboot_demo.exception.UserNotFoundException;
 import com.cz.springboot_demo.pojo.User;
 import com.cz.springboot_demo.pojo.dto.*;
 import com.cz.springboot_demo.repository.UserRepository;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -25,16 +27,19 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @Cacheable(value = "users", key = "'all'")
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
     @Override
+    @Cacheable(value = "userCount", key = "'count'")
     public long getUserCount() {
         return userRepository.count();
     }
 
     @Override
+    @CacheEvict(value = {"users", "userCount"}, allEntries = true)
     public User add(UserCreateDTO userCreateDto) {
         // 检查用户名是否已存在
         if (userRepository.findByUserName(userCreateDto.getUserName()).isPresent()) {
@@ -58,6 +63,7 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @CacheEvict(value = {"users", "userCount", "user"}, allEntries = true)
     public void delete(Integer userId) {
         if (!userRepository.existsById(userId)) {
             throw new UserNotFoundException("User not found");
@@ -66,6 +72,7 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @CacheEvict(value = {"users", "userCount", "user"}, allEntries = true)
     public User edit(UserEditDTO userEditDTO) {
         Optional<User> optionalUser = userRepository.findByUserName(userEditDTO.getUserName());
         if (!optionalUser.isPresent()) {
@@ -87,6 +94,7 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @Cacheable(value = "user", key = "#userId")
     public User getUser(Integer userId) {
         Optional<User> user = userRepository.findById(userId);
         if (!user.isPresent()) {
@@ -96,6 +104,7 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @Cacheable(value = "user", key = "'username:' + #userName")
     public User getUserByUsername(String userName) {
         Optional<User> user = userRepository.findByUserName(userName);
         if (!user.isPresent()) {
@@ -122,6 +131,7 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @Cacheable(value = "users", key = "'company'")
     public List<User> getAllCompany() {
         return userRepository.findByRole("deliveryCo");
     }

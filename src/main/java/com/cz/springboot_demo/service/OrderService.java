@@ -12,6 +12,8 @@ import com.cz.springboot_demo.repository.ProductRepository;
 import com.cz.springboot_demo.repository.UserRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,6 +32,7 @@ public class OrderService implements IOrderService {
     ProductRepository productRepository;
 
     @Override
+    @CacheEvict(value = {"orders", "orderCount", "order"}, allEntries = true)
     public Order addOrder(OrderDTO orderDTO) {
 //        if (orderRepository.findByOrderName(oderDTO.getOrderName()).isPresent()) {
 //            throw new OrderAlreadyExistException("Order already exist");
@@ -49,6 +52,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
+    @CacheEvict(value = {"orders", "orderCount", "order"}, allEntries = true)
     public void deleteOrder(Long oder_id) {
         if (orderRepository.findById(oder_id).isPresent()) {
             orderRepository.deleteById(oder_id);
@@ -56,6 +60,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
+    @CacheEvict(value = {"orders", "orderCount", "order"}, allEntries = true)
     public Order updateOrder(Long order_id, OrderEditDTO orderEditDTO) {
         Optional<Order> optionalOder = orderRepository.findById(order_id);
         if (optionalOder.isPresent()) {
@@ -71,6 +76,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
+    @Cacheable(value = "order", key = "#oder_id")
     public Order getOderById(Long oder_id) {
         if (orderRepository.findById(oder_id).isPresent()) {
             return orderRepository.findById(oder_id).get();
@@ -80,6 +86,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
+    @Cacheable(value = "orders", key = "'all'")
     public List<Order> getAllOrder() {
         List<Order> orderList = new ArrayList<>();
         orderRepository.findAll().forEach(orderList::add);
@@ -87,6 +94,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
+    @CacheEvict(value = {"orders", "orderCount", "order"}, allEntries = true)
     public Order updateOrderStatus(Long order_id, String newStatus) {
         Optional<Order> optionalOder = orderRepository.findById(order_id);
         if (optionalOder.isPresent()) {
@@ -100,11 +108,13 @@ public class OrderService implements IOrderService {
     }
 
     @Override
+    @Cacheable(value = "orderCount", key = "'count'")
     public Long getNumberOfOrder() {
         return orderRepository.count();
     }
 
     @Override
+    @Cacheable(value = "order", key = "'name:' + #orderName")
     public Order getOrderByOrderName(String orderName) {
         if (orderRepository.findByOrderName(orderName).isPresent()) {
             return orderRepository.findByOrderName(orderName).get();

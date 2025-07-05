@@ -1,12 +1,13 @@
 package com.cz.springboot_demo.pojo;
 
 import jakarta.persistence.*;
+import java.io.Serializable;
 
 // Since 2025/5/11 by CZ
 // 将类映射成一个表
 @Table(name = "tb_user") // 映射的表名称
 @Entity
-public class User {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 默认自增生成方式
     @Column(name = "user_id")

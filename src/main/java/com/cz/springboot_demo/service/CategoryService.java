@@ -9,6 +9,8 @@ import com.cz.springboot_demo.pojo.dto.CategoryEditDTO;
 import com.cz.springboot_demo.repository.CategoryRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +22,7 @@ public class CategoryService implements ICategoryService {
     @Autowired
     CategoryRepository categoryRepository;
 
+    @CacheEvict(value = {"categories", "category"}, allEntries = true)
     public Category addCategory(CategoryCreateDTO categoryCreateDTO) {
         if (categoryRepository.findByCategoryName(categoryCreateDTO.getCategoryName()).isPresent()) {
             throw new CategoryAlreadyExistException("Category already exist");
@@ -31,6 +34,7 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
+    @CacheEvict(value = {"categories", "category"}, allEntries = true)
     public void deleteCategory(Long categoryId) {
         if (categoryRepository.findById(categoryId).isPresent()) {
             categoryRepository.deleteById(categoryId);
@@ -40,6 +44,7 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
+    @CacheEvict(value = {"categories", "category"}, allEntries = true)
     public Category updateCategory(Long categoryId, CategoryEditDTO categoryEditDTO) {
 //        Optional<Category> optionalCategory = categoryRepository.findByCategoryName(categoryEditDTO.getCategoryName());
         Optional<Category> optionalCategory = categoryRepository.findById(categoryId);
@@ -57,36 +62,43 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
+    @Cacheable(value = "category", key = "#categoryId")
     public Category getCategoryByCategoryId(Long categoryId) {
         return categoryRepository.findById(categoryId).orElseThrow(() -> new CategoryNotFoundException("Category not exist"));
     }
 
     @Override
+    @Cacheable(value = "category", key = "'name:' + #categoryName")
     public Category getCategoryByCategoryName(String categoryName) {
         return categoryRepository.findByCategoryName(categoryName).orElseThrow(() -> new CategoryNotFoundException("Category not exist"));
     }
 
     @Override
+    @Cacheable(value = "categories", key = "'level:0'")
     public List<Category> getFirstClassCategory() {
         return categoryRepository.findByCategoryLevel(0);
     }
 
     @Override
+    @Cacheable(value = "categories", key = "'level:1'")
     public List<Category> getSecondClassCategory() {
         return categoryRepository.findByCategoryLevel(1);
     }
 
     @Override
+    @Cacheable(value = "categories", key = "'level:2'")
     public List<Category> getThirdClassCategory() {
         return categoryRepository.findByCategoryLevel(2);
     }
 
     @Override
+    @Cacheable(value = "categories", key = "'all'")
     public List<Category> getAllCategories() {
         return categoryRepository.findAll();
     }
 
     @Override
+    @Cacheable(value = "categories", key = "'children:' + #categoryId")
     public List<Category> getChildById(Long categoryId) {
         if (!categoryRepository.findById(categoryId).isPresent()) {
             throw new CategoryNotFoundException("Category not exist");

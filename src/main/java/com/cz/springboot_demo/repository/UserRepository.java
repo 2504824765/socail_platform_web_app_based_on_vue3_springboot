@@ -29,7 +29,7 @@ public class UserRepository {
     // 数据库连接信息（请替换成你的配置）
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/springboot_cz_demo?serverTimezone=UTC";
     private static final String JDBC_USER = "root";
-    private static final String JDBC_PASSWORD = "Cz20041212";
+    private static final String JDBC_PASSWORD = "12345678";
 
     // 获取数据库连接
     private Connection getConnection() throws SQLException {

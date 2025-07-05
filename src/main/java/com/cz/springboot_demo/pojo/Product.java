@@ -1,11 +1,12 @@
 package com.cz.springboot_demo.pojo;
 
 import jakarta.persistence.*;
+import java.io.Serializable;
 
 // Since 2025/5/25 by CZ
 @Table(name = "tb_product")
 @Entity
-public class Product {
+public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
