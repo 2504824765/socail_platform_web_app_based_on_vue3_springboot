@@ -32,6 +32,7 @@ public class OrderService implements IOrderService {
     ProductRepository productRepository;
 
     @Override
+    // 更新缓存数据
     @CacheEvict(value = {"orders", "orderCount", "order"}, allEntries = true)
     public Order addOrder(OrderDTO orderDTO) {
 //        if (orderRepository.findByOrderName(oderDTO.getOrderName()).isPresent()) {
@@ -86,6 +87,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
+    // 获取缓存数据
     @Cacheable(value = "orders", key = "'all'")
     public List<Order> getAllOrder() {
         List<Order> orderList = new ArrayList<>();
